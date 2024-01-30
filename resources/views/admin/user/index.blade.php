@@ -20,8 +20,15 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>
-                                <a href="/admin/user/{{ $item->id }}/edit" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                <div class="d-flex">
+                                    <a href="/admin/user/{{ $item->id }}/edit" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                    <!-- <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> -->
+                                    <form action="/admin/user/{{ $item->id }}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm ml-1"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
