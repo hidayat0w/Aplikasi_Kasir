@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminKategoriController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,7 @@ Route::get('/', function () {
         'content' => 'admin.dashboard.index'
     ];
     return view('admin.layouts.wrapper', $data);
-});
+})->middleware('auth');
 
 Route::prefix('/admin')->middleware('auth')->group(function(){
 
@@ -39,6 +40,8 @@ Route::prefix('/admin')->middleware('auth')->group(function(){
         return view('admin.layouts.wrapper', $data);
     });
 
+
+    Route::resource('/kategori', AdminKategoriController::class);
     Route::resource('/user', AdminUserController::class);
 });
 

@@ -15,7 +15,8 @@ class AdminUserController extends Controller
     public function index()
     {
         $data = [
-            'user' => User::get(),
+            'title'   => 'Manajemen User',
+            'user'    => User::get(),
             'content' => 'admin.user.index'
         ];
         return view('admin.layouts.wrapper', $data);
