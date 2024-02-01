@@ -6,7 +6,7 @@
                 <div class="card-body">
 
                     <h5 class="p-1"><b>{{ $title }}</b></h5>
-                    <a href="/admin/user/create" class="btn btn-primary"><i class="fas-fa-plus"></i>Tambah Data</a>
+                    <a href="/admin/user/create" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Data </a>
 
                     <table class="table mt-1">
                         <tr>
