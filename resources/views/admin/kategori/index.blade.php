@@ -13,14 +13,15 @@
                         <th>Action</th>
                     </tr>
 
+                    @foreach($kategori as $k)
                     <tr>
-                        <td>1</td>
-                        <td>Makanan Ringan</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $k->name }}</td>
                         <td>
                         <div class="d-flex">
-                                    <a href="/admin/user/edit" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                    <a href="/admin/kategori/{{ $k->id }}/edit" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                                     <!-- <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a> -->
-                                    <form action="/admin/user" method="POST">
+                                    <form action="/admin/kategori/{{ $k->id }}" method="POST">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm ml-1"><i class="fas fa-trash"></i></button>
@@ -28,7 +29,11 @@
                                 </div>
                         </td>
                     </tr>
+                    @endforeach
                 </table>
+                <div class="d-flex justify-content-center">    
+                    {{ $kategori->links() }}
+                </div>
             </div>
         </div>
     </div>
