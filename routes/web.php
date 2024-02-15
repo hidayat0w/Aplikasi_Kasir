@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminKategoriController;
+use App\Http\Controllers\AdminProdukController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,13 +42,14 @@ Route::prefix('/admin')->middleware('auth')->group(function(){
     });
 
 
+    Route::resource('/produk', AdminProdukController::class);
     Route::resource('/kategori', AdminKategoriController::class);
     Route::resource('/user', AdminUserController::class);
 });
 
-Route::get('/post', function () {
-    $data = [
-        'content' => 'admin.post.index'
-    ];
-    return view('admin.layouts.wrapper', $data);
-});
+// Route::get('/post', function () {
+//     $data = [
+//         'content' => 'admin.post.index'
+//     ];
+//     return view('admin.layouts.wrapper', $data);
+// });
