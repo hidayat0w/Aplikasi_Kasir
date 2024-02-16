@@ -84,8 +84,9 @@ class AdminProdukController extends Controller
         //
         $data = [
             'title'    => 'Tambah Produk',
-            'produk' => Produk::find($id),
-            'content'  => 'admin/produk/create'
+            'kategori' => Kategori::get(),
+            'produk'   => Produk::find($id),
+            'content'  => 'admin/produk/create',
         ];
         return view('admin.layouts.wrapper', $data );
     }
@@ -98,8 +99,23 @@ class AdminProdukController extends Controller
         //
         $produk = Produk::find($id);
         $data = $request->validate([
-            'name' => 'required|unique:produks,name,'. $produk->id
+            'name' => 'required',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
         ]);
+
+        if ($request->hasFile('gambar')){
+            $gambar = $request->file('gambar');
+            $file_name = time() . "_" . $gambar->getClientOriginalName();
+
+            $storage = 'uploads/images/';
+            $gambar->move($storage, $file_name);
+            $data['gambar'] = $storage . $file_name;
+        } else {
+            $data['gambar'] = $produk->gambar;
+        }
+
         $produk->update($data);
         Alert::success('Sukses', 'Data berhasil diedit');
         return redirect()->back();
@@ -112,6 +128,10 @@ class AdminProdukController extends Controller
     {
         //
         $produk = Produk::find($id);
+
+        if ($produk->gambar != null){
+            unlink($produk->gambar);
+        }
         $produk->delete();
         Alert::success('Sukses', 'Data berhasil dihapus');
         return redirect()->back();
